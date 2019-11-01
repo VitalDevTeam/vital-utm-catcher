@@ -115,15 +115,25 @@ class Vital_Utm_Catcher {
 				$cookie_name = '';
 			}
 
-			$domain = $_SERVER['SERVER_NAME'];
+			$domain = parse_url(get_site_url(), PHP_URL_HOST);
 
-			if (strtolower(substr($domain, 0, 4)) == 'www.') {
+			// Remove www subdomain
+			if (strtolower(substr($domain, 0, 4)) === 'www.') {
 				$domain = substr($domain, 4);
 			}
 
-			if (substr($domain, 0, 1) != '.' && $domain != 'localhost') {
+			// Add dot prefix for compatibility with subdomains
+			if (substr($domain, 0, 1) !== '.' && $domain !== 'localhost') {
 				$domain = '.' . $domain;
 			}
+
+			// Remove port
+			$port = strpos($domain, ':');
+			if ($port !== false) {
+				$domain = substr($domain, 0, $port);
+			}
+
+			write_log($domain);
 
 			setcookie($field, $cookie_name, strtotime("+{$this->cookie_expires} seconds"), $domain);
 
