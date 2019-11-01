@@ -133,8 +133,6 @@ class Vital_Utm_Catcher {
 				$domain = substr($domain, 0, $port);
 			}
 
-			write_log($domain);
-
 			setcookie($field, $cookie_name, strtotime("+{$this->cookie_expires} seconds"), $domain);
 
 			$_COOKIE[$field] = $cookie_name;
