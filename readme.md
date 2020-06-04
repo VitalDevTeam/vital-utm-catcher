@@ -6,6 +6,8 @@ By default the plugin will already handle the following URL parameters: `'utm_so
 
 Default cookie expiration time is 24 hours.
 
+Add `?utm_catcher_params` to any link `href` URL and the plugin will replace it with any caught UTM parameters.
+
 ## Installation
 
 1. Download the latest release from the repository's [release page](https://github.com/VitalDevTeam/vital-utm-catcher/releases).
@@ -16,3 +18,13 @@ Default cookie expiration time is 24 hours.
 * Customize the plugin's settings in `vital-utm-catcher.php`.
 * The list of URL parameters the plugin catches are stored in the `$utm_params` variable.
 * The cookie lifetime is stored in the `$cookie_expires` variable.
+* Add `?utm_catcher_params` to any link `href` URL and the plugin will replace it with any caught UTM parameters.
+
+## Changelog
+
+### 1.1.0
+* Adds support for `utm_catcher_params` token replacement in link URLs.
+* Adds minified version of plugin's JavaScript.
+
+### 1.0.0
+* Initial release.

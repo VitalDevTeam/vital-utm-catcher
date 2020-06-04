@@ -3,7 +3,7 @@
 	Plugin Name: Vital UTM Catcher
 	Plugin URI: https://vtldesign.com
 	Description: Simple UTM parameter processor
-	Version: 1.0.0
+	Version: 1.1.0
 	Author: Vital
 	Author URI: https://vtldesign.com
 	Text Domain: vital
@@ -71,15 +71,24 @@ class Vital_Utm_Catcher {
 	public $cookie_expires;
 
 	/**
+	 * The asset file name suffix.
+	 * @var     string
+	 * @access  private
+	 * @since   1.1.0
+	 */
+	private $suffix;
+
+	/**
 	 * Constructor function.
 	 * @access  public
 	 * @since   1.0.0
 	 * @return  void
 	 */
 	public function __construct() {
-		$this->_version = '1.0.0';
+		$this->_version = '1.1.0';
 		$this->assets_dir = plugin_dir_path(__FILE__);
 		$this->assets_url  = plugin_dir_url(__FILE__);
+		$this->suffix = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? '' : '.min';
 
 		// Sets parameters to catch
 		$this->utm_params = [
@@ -150,7 +159,7 @@ class Vital_Utm_Catcher {
 
 		wp_enqueue_script(
 			'vital_utm_catcher',
-			$this->assets_url . '/assets/vital-utm-catcher.js',
+			$this->assets_url . '/assets/vital-utm-catcher' . $this->suffix . '.js',
 			[],
 			$this->_version,
 			true
