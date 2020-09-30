@@ -3,7 +3,7 @@
 	Plugin Name: Vital UTM Catcher
 	Plugin URI: https://vtldesign.com
 	Description: Simple UTM parameter processor
-	Version: 1.1.0
+	Version: 1.1.1
 	Author: Vital
 	Author URI: https://vtldesign.com
 	Text Domain: vital
@@ -85,7 +85,7 @@ class Vital_Utm_Catcher {
 	 * @return  void
 	 */
 	public function __construct() {
-		$this->_version = '1.1.0';
+		$this->_version = '1.1.1';
 		$this->assets_dir = plugin_dir_path(__FILE__);
 		$this->assets_url  = plugin_dir_url(__FILE__);
 		$this->suffix = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? '' : '.min';
@@ -117,11 +117,11 @@ class Vital_Utm_Catcher {
 
 		foreach ($this->utm_params as $field) {
 			if (isset($_GET[$field]) && $_GET[$field] !== '') {
-				$cookie_name = htmlspecialchars($_GET[$field], ENT_QUOTES, 'UTF-8');
+				$cookie_value = htmlspecialchars($_GET[$field], ENT_QUOTES, 'UTF-8');
 			} elseif (isset($_COOKIE[$field]) && $_COOKIE[$field] !== '') {
-				$cookie_name = $_COOKIE[$field];
+				$cookie_value = $_COOKIE[$field];
 			} else {
-				$cookie_name = '';
+				$cookie_value = '';
 			}
 
 			$domain = parse_url(get_site_url(), PHP_URL_HOST);
@@ -142,9 +142,10 @@ class Vital_Utm_Catcher {
 				$domain = substr($domain, 0, $port);
 			}
 
-			setcookie($field, $cookie_name, strtotime("+{$this->cookie_expires} seconds"), $domain);
-
-			$_COOKIE[$field] = $cookie_name;
+			if ($cookie_value !== '') {
+				setcookie($field, $cookie_value, strtotime("+{$this->cookie_expires} seconds"), $domain);
+				$_COOKIE[$field] = $cookie_value;
+			}
 		}
 	}
 

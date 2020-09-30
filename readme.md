@@ -22,6 +22,9 @@ Add `?utm_catcher_params` to any link `href` URL and the plugin will replace it 
 
 ## Changelog
 
+### 1.1.1
+* Adds check for empty cookie before setting PHP cookie. Could cause caching issues with nginx/Varnish.
+
 ### 1.1.0
 * Adds support for `utm_catcher_params` token replacement in link URLs.
 * Adds minified version of plugin's JavaScript.
