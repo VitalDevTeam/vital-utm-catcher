@@ -3,7 +3,7 @@
 	Plugin Name: Vital UTM Catcher
 	Plugin URI: https://vtldesign.com
 	Description: Simple UTM parameter processor
-	Version: 1.1.2
+	Version: 1.1.3
 	Author: Vital
 	Author URI: https://vtldesign.com
 	Text Domain: vital
@@ -85,7 +85,7 @@ class Vital_Utm_Catcher {
 	 * @return  void
 	 */
 	public function __construct() {
-		$this->_version = '1.1.2';
+		$this->_version = '1.1.3';
 		$this->assets_dir = plugin_dir_path(__FILE__);
 		$this->assets_url  = plugin_dir_url(__FILE__);
 		$this->suffix = (defined('SCRIPT_DEBUG') && SCRIPT_DEBUG) ? '' : '.min';
@@ -97,6 +97,7 @@ class Vital_Utm_Catcher {
 			'utm_term',
 			'utm_content',
 			'utm_campaign',
+			'gclid',
 		];
 
 		// Sets 24-hour expiration on all cookies

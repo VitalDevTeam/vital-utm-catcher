@@ -22,6 +22,9 @@ Add `?utm_catcher_params` to any link `href` URL and the plugin will replace it 
 
 ## Changelog
 
+### 1.1.3
+* Add gclid to setCookie list
+
 ### 1.1.2
 * Update setcookie with domain path
 
